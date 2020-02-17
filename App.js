@@ -1,24 +1,22 @@
 import React, { useState } from "react";
-import { StyleSheet, Text, View } from "react-native";
 import * as Font from "expo-font";
-import Home from "./screens/Home";
 import { AppLoading } from "expo";
+import Navigator from "./routes/Drawer";
 
-const getFont = () => {
-  return Font.loadAsync({
+const getFonts = () =>
+  Font.loadAsync({
     "nunito-regular": require("./assets/fonts/Nunito-Regular.ttf"),
     "nunito-bold": require("./assets/fonts/Nunito-Bold.ttf")
   });
-};
 
 export default function App() {
-  const [fontsLoaded, setFonts] = useState(false);
+  const [fontsLoaded, setFontsLoaded] = useState(false);
 
   if (fontsLoaded) {
-    return <Home />;
+    return <Navigator />;
   } else {
-    return <AppLoading startAsync={getFont} onFinish={() => setFonts(true)} />;
+    return (
+      <AppLoading startAsync={getFonts} onFinish={() => setFontsLoaded(true)} />
+    );
   }
 }
-
-const styles = StyleSheet.create({});
